@@ -4,223 +4,423 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>أكاديمية إيترايدينغ - تعليم التداول الاحترافي</title>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700&family=Poppins:wght@400;500;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link rel="stylesheet" href="style.css">
-    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700&family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
 </head>
 <body>
+    <!-- Announcement Bar -->
+    <div class="announcement-bar" id="announcementBar">
+        <p>🎁 <strong>عرض خاص:</strong> سجل الآن واحصل على <span class="highlight-gold">$30 هدية</span> + $30 إضافية عند التواصل مع INZO!</p>
+        <button class="close-announcement" onclick="document.getElementById('announcementBar').style.display='none';">&times;</button>
+    </div>
+
     <!-- Header -->
     <header class="header">
-        <div class="header-container">
+        <div class="container">
             <div class="logo-section">
                 <img src="logo.png" alt="E-TRADING Logo" class="logo">
-                <h1 class="logo-text">E-TRADING</h1>
+                <span class="logo-text">E-TRADING</span>
             </div>
-            <nav class="nav-menu" id="navMenu">
-                <a href="#home" class="nav-link">الرئيسية</a>
-                <a href="#courses" class="nav-link">الدورات</a>
-                <a href="#payment" class="nav-link">طرق الدفع</a>
-                <a href="about.html" class="nav-link">عن الأكاديمية</a>
-                <a href="#contact" class="nav-link">تواصل معنا</a>
+            <nav class="nav">
+                <a href="#home">الرئيسية</a>
+                <a href="#inzo">عرض INZO</a>
+                <a href="#why-us">لماذا نحن؟</a>
+                <a href="#courses">الدورات</a>
+                <a href="#results">النتائج</a>
+                <a href="#faq">الأسئلة</a>
             </nav>
-            <button class="menu-toggle" id="menuToggle">
+            <div class="hamburger" id="hamburger">
                 <span></span>
                 <span></span>
                 <span></span>
-            </button>
+            </div>
         </div>
     </header>
 
-    <!-- Hero Section -->
+    <!-- Hero with Video Background -->
     <section class="hero" id="home">
+        <video autoplay muted loop class="hero-video" id="heroVideo">
+            <source src="trading-hero.mp4" type="video/mp4">
+        </video>
+        <div class="hero-overlay"></div>
         <div class="hero-content">
-            <h2 class="hero-title">تعلم التداول الاحترافي</h2>
-            <p class="hero-subtitle">من الأساسيات إلى الاستراتيجيات المتقدمة</p>
-            <p class="hero-description">انضم إلى آلاف المتداولين الناجحين واكتسب المهارات الحقيقية للتداول برفع متوازن</p>
-            <button class="cta-button">ابدأ الآن</button>
+            <h1>أكاديمية إيترايدينغ</h1>
+            <p>تعليم التداول الاحترافي بـ Price Action و Smart Money Concepts</p>
+            <div class="hero-buttons">
+                <button class="btn btn-primary" onclick="scrollTo('inzo')">ابدأ معنا الآن</button>
+                <button class="btn btn-secondary" onclick="scrollTo('courses')">اكتشف الدورات</button>
+            </div>
+        </div>
+    </section>
+
+    <!-- INZO Partnership Section -->
+    <section class="inzo-section" id="inzo">
+        <div class="container">
+            <div class="section-header">
+                <h2>🎯 شراكة INZO - عرض حصري</h2>
+                <p>كن وكيل إحالة معنا واربح عمولات رائعة</p>
+            </div>
+            
+            <div class="inzo-grid">
+                <div class="inzo-card">
+                    <div class="inzo-icon">💰</div>
+                    <h3>$30 هدية فورية</h3>
+                    <p>كل من يسجل عبر رابط الإحالة الخاص بك يحصل على $30 هدية مباشرة</p>
+                    <div class="highlight-box">للتفعيل: سجل واضغط على "احصل على رابط الإحالة"</div>
+                </div>
+                
+                <div class="inzo-card featured">
+                    <div class="inzo-icon">⭐</div>
+                    <h3>+$30 إضافية</h3>
+                    <p>تواصل معنا على تلغرام فوراً لتفعيل حسابك واحصل على $30 إضافية</p>
+                    <div class="highlight-box gold">المجموع = $60 لكل مسجل جديد!</div>
+                </div>
+                
+                <div class="inzo-card">
+                    <div class="inzo-icon">📊</div>
+                    <h3>دعم كامل</h3>
+                    <p>فريق INZO سيدعمك في كل خطوة من عملية الإحالة</p>
+                    <a href="https://t.me/E_Trading9" class="btn-link">→ تواصل على تلغرام</a>
+                </div>
+            </div>
+
+            <div class="inzo-process">
+                <h3>خطوات الحصول على الحوافز:</h3>
+                <div class="process-steps">
+                    <div class="step">
+                        <span class="step-number">1</span>
+                        <p><strong>سجل:</strong> أنشئ حسابك عبر الموقع</p>
+                    </div>
+                    <div class="step">
+                        <span class="step-number">2</span>
+                        <p><strong>ضع رابطك:</strong> احصل على رابط الإحالة الخاص بك</p>
+                    </div>
+                    <div class="step">
+                        <span class="step-number">3</span>
+                        <p><strong>تواصل:</strong> أرسل رسالة على تلغرام @E_Trading9</p>
+                    </div>
+                    <div class="step">
+                        <span class="step-number">4</span>
+                        <p><strong>استقبل:</strong> اجمع الـ $30 + $30 لكل مسجل</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="inzo-cta">
+                <a href="https://t.me/E_Trading9" class="btn btn-primary btn-lg">
+                    <i class="fab fa-telegram"></i> تواصل معنا على تلغرام الآن
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Why Us Section -->
+    <section class="why-us" id="why-us">
+        <div class="container">
+            <div class="section-header">
+                <h2>🌟 لماذا تختار أكاديمية إيترايدينغ؟</h2>
+                <p>معايير فريدة لضمان نجاحك</p>
+            </div>
+
+            <div class="why-grid">
+                <div class="why-card">
+                    <div class="why-icon">📈</div>
+                    <h3>Price Action الحقيقي</h3>
+                    <p>تعليم Price Action والشموع اليابانية بطريقة عملية مختبرة على الحقيقة</p>
+                </div>
+                <div class="why-card">
+                    <div class="why-icon">🧠</div>
+                    <h3>Smart Money Concepts</h3>
+                    <p>فهم سلوك الأموال الكبيرة وكيفية تحرك السوق الحقيقي</p>
+                </div>
+                <div class="why-card">
+                    <div class="why-icon">👥</div>
+                    <h3>متابعة مباشرة</h3>
+                    <p>تواصل مباشر مع المدرب والإجابة على الأسئلة في الحال</p>
+                </div>
+                <div class="why-card">
+                    <div class="why-icon">🎓</div>
+                    <h3>شهادات معترف بها</h3>
+                    <p>احصل على شهادات مثل FTMO و FundingPips بدعمنا الكامل</p>
+                </div>
+                <div class="why-card">
+                    <div class="why-icon">💬</div>
+                    <h3>دعم مستمر</h3>
+                    <p>دعم 24/7 على تلغرام وواتس آب بدون مقابل</p>
+                </div>
+                <div class="why-card">
+                    <div class="why-icon">⚡</div>
+                    <h3>محتوى حي</h3>
+                    <p>جلسات حية يومية لتحليل السوق والإجابة على الاستفسارات</p>
+                </div>
+            </div>
         </div>
     </section>
 
     <!-- Courses Section -->
-    <section class="courses" id="courses">
-        <div class="section-container">
-            <h2 class="section-title">برامجنا التدريبية</h2>
-            <p class="section-subtitle">اختر المسار الذي يناسبك</p>
-            
-            <div class="courses-grid">
-                <!-- Course 1 -->
-                <div class="course-card basic">
-                    <div class="course-header">
-                        <h3 class="course-title">أساسيات التداول</h3>
-                        <span class="course-badge">مجاني</span>
-                    </div>
-                    <div class="course-content">
-                        <p class="course-description">تعرف على أساسيات التداول وفهم السوق بشكل صحيح</p>
-                        <div class="course-info-block">
-                            <span class="info-label">المدة:</span>
-                            <span class="info-value">4 أسابيع</span>
-                        </div>
-                        <div class="course-info-block">
-                            <span class="info-label">الوصول:</span>
-                            <span class="info-value">مجاني لفترة محدودة</span>
-                        </div>
-                        <ul class="course-features">
-                            <li>✓ مقدمة شاملة للأسواق المالية</li>
-                            <li>✓ فهم القراءات البيانية الأساسية</li>
-                            <li>✓ إدارة المخاطر الأولية</li>
-                            <li>✓ أدوات التداول الأساسية</li>
-                            <li>✓ شهادة إتمام الدورة</li>
-                        </ul>
-                    </div>
-                    <a href="basic-course.html" class="course-btn basic-btn">اعرف المزيد</a>
-                </div>
+    <section class="courses-section" id="courses">
+        <div class="container">
+            <div class="section-header">
+                <h2>📚 الدورات المتاحة</h2>
+                <p>اختر الدورة المناسبة لك</p>
+            </div>
 
-                <!-- Course 2 -->
-                <div class="course-card premium">
-                    <div class="course-header">
-                        <h3 class="course-title">دورة SMC الاحترافية</h3>
-                        <span class="course-badge premium-badge">متقدمة</span>
+            <div class="courses-grid">
+                <a href="basic-course.html" class="course-card">
+                    <div class="course-badge free">مجاني</div>
+                    <h3>أساسيات التداول</h3>
+                    <p>مقدمة شاملة لمبادئ التداول والأسواق</p>
+                    <div class="course-duration">⏱ 4 أسابيع</div>
+                    <button class="btn btn-outline">تفاصيل الدورة</button>
+                </a>
+
+                <a href="smc-course.html" class="course-card featured">
+                    <div class="course-badge premium">احترافي</div>
+                    <h3>دورة SMC الاحترافية</h3>
+                    <p>تعليم متقدم في Smart Money Concepts</p>
+                    <div class="course-duration">⏱ 8 أسابيع</div>
+                    <button class="btn btn-primary">ادخل الآن</button>
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Student Results Section -->
+    <section class="results-section" id="results">
+        <div class="container">
+            <div class="section-header">
+                <h2>🏆 نتائج طلابنا</h2>
+                <p>قصص نجاح حقيقية من أكاديميتنا</p>
+            </div>
+
+            <div class="results-grid" id="resultsGrid">
+                <div class="result-card">
+                    <div class="result-image placeholder">
+                        <i class="fas fa-chart-line"></i>
                     </div>
-                    <div class="course-content">
-                        <p class="course-description">إتقان استراتيجية SMC وتحليل السوق المتقدم</p>
-                        <div class="course-info-block">
-                            <span class="info-label">الباقة تشمل:</span>
-                        </div>
-                        <ul class="course-features premium-features">
-                            <li>✓ دورة SMC متقدمة كاملة</li>
-                            <li>✓ دخول حصري لقناة التوصيات</li>
-                            <li>✓ حساب هدية بقيمة $60</li>
-                            <li>✓ جلسات استشارة فردية</li>
-                            <li>✓ محتوى حصري وتحديثات مستمرة</li>
-                            <li>✓ مجتمع متقدم من المتداولين</li>
-                        </ul>
+                    <h4>طالب 1</h4>
+                    <p class="profit">الربح: +$5,000</p>
+                    <p class="review">"الدورة غيّرت نظري للتداول تماماً"</p>
+                </div>
+                <div class="result-card">
+                    <div class="result-image placeholder">
+                        <i class="fas fa-trophy"></i>
                     </div>
-                    <a href="smc-course.html" class="course-btn premium-btn">اعرف المزيد</a>
+                    <h4>طالب 2</h4>
+                    <p class="profit">الربح: +$8,500</p>
+                    <p class="review">"أفضل استثمار قمت به في حياتي"</p>
+                </div>
+                <div class="result-card">
+                    <div class="result-image placeholder">
+                        <i class="fas fa-star"></i>
+                    </div>
+                    <h4>طالب 3</h4>
+                    <p class="profit">الربح: +$12,000</p>
+                    <p class="review">"المتابعة المباشرة ساعدتني كثيراً"</p>
+                </div>
+            </div>
+
+            <div class="results-note">
+                <p>📸 <strong>هل لديك نتيجة ناجحة؟</strong> شارك صورتك معنا واحصل على مكافأة!</p>
+                <a href="https://t.me/E_Trading9" class="btn btn-secondary">ارسل صورتك</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Curriculum Roadmap -->
+    <section class="curriculum-section">
+        <div class="container">
+            <div class="section-header">
+                <h2>🗺️ خريطة الدراسة</h2>
+                <p>مراحل التعلم خطوة بخطوة</p>
+            </div>
+
+            <div class="curriculum-timeline">
+                <div class="timeline-item">
+                    <div class="timeline-marker">1</div>
+                    <div class="timeline-content">
+                        <h4>الأساسيات</h4>
+                        <p>فهم الأسواق والشموع والترندات</p>
+                    </div>
+                </div>
+                <div class="timeline-item">
+                    <div class="timeline-marker">2</div>
+                    <div class="timeline-content">
+                        <h4>Price Action</h4>
+                        <p>قراءة حركة السعر والأنماط</p>
+                    </div>
+                </div>
+                <div class="timeline-item">
+                    <div class="timeline-marker">3</div>
+                    <div class="timeline-content">
+                        <h4>SMC</h4>
+                        <p>فهم سلوك الأموال الكبيرة</p>
+                    </div>
+                </div>
+                <div class="timeline-item">
+                    <div class="timeline-marker">4</div>
+                    <div class="timeline-content">
+                        <h4>التطبيق العملي</h4>
+                        <p>تداول حقيقي بدعم مباشر</p>
+                    </div>
+                </div>
+                <div class="timeline-item">
+                    <div class="timeline-marker">5</div>
+                    <div class="timeline-content">
+                        <h4>الاحتراف</h4>
+                        <p>الشهادات والعمل كمتداول محترف</p>
+                    </div>
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- Payment Methods Section -->
-    <section class="payment" id="payment">
-        <div class="section-container">
-            <h2 class="section-title">طرق الدفع الآمنة</h2>
-            <p class="section-subtitle">ندعم العملات المشفرة الموثوقة</p>
-            
-            <div class="payment-grid">
-                <a href="usdt-payment.html" class="payment-method payment-link">
-                    <div class="payment-icon">
-                        <svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
-                            <circle cx="50" cy="50" r="45" fill="none" stroke="currentColor" stroke-width="2"/>
-                            <text x="50" y="60" text-anchor="middle" font-size="40" font-weight="bold" fill="currentColor">₮</text>
-                        </svg>
-                    </div>
-                    <h3 class="payment-title">USDT (Tether) TRC20</h3>
-                    <p class="payment-description">عملة مستقرة بقيمة الدولار الأمريكي</p>
-                    <ul class="payment-benefits">
-                        <li>• تحويلات سريعة وآمنة</li>
-                        <li>• رسوم منخفضة جداً</li>
-                        <li>• متوفرة على جميع الشبكات</li>
-                        <li>• محفظة آمنة مضمونة</li>
-                    </ul>
-                    <span class="learn-more">اضغط لمزيد من التفاصيل →</span>
-                </a>
-
-                <div class="payment-method">
-                    <div class="payment-icon">
-                        <svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
-                            <circle cx="50" cy="50" r="45" fill="none" stroke="currentColor" stroke-width="2"/>
-                            <text x="50" y="60" text-anchor="middle" font-size="30" font-weight="bold" fill="currentColor">₿</text>
-                        </svg>
-                    </div>
-                    <h3 class="payment-title">البيتكوين</h3>
-                    <p class="payment-description">أكبر عملة مشفرة بالعالم</p>
-                    <ul class="payment-benefits">
-                        <li>• أعلى مستويات الأمان</li>
-                        <li>• قيمة استثمارية قوية</li>
-                        <li>• معترف بها عالمياً</li>
-                        <li>• تحويلات لامركزية موثوقة</li>
-                    </ul>
-                </div>
-
-                <div class="payment-method">
-                    <div class="payment-icon">
-                        <svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
-                            <circle cx="50" cy="50" r="45" fill="none" stroke="currentColor" stroke-width="2"/>
-                            <text x="50" y="60" text-anchor="middle" font-size="35" font-weight="bold" fill="currentColor">E</text>
-                        </svg>
-                    </div>
-                    <h3 class="payment-title">الإيثيريوم</h3>
-                    <p class="payment-description">منصة العقود الذكية الرائدة</p>
-                    <ul class="payment-benefits">
-                        <li>• رسوم معقولة وسريعة</li>
-                        <li>• عقود ذكية آمنة</li>
-                        <li>• دعم شامل للتطبيقات</li>
-                        <li>• شبكة موثوقة وقوية</li>
-                    </ul>
-                </div>
+    <!-- FAQ Section -->
+    <section class="faq-section" id="faq">
+        <div class="container">
+            <div class="section-header">
+                <h2>❓ الأسئلة الشائعة</h2>
+                <p>إجابات على أسئلتك المتكررة</p>
             </div>
 
-            <div class="payment-info">
-                <h3 class="info-title">كيف تدفع؟</h3>
-                <ol class="payment-steps">
-                    <li><strong>اختر العملة:</strong> اختر من USDT أو البيتكوين أو الإيثيريوم</li>
-                    <li><strong>احصل على العنوان:</strong> ستتلقى عنوان المحفظة الآمن</li>
-                    <li><strong>أرسل الدفعة:</strong> حول المبلغ من محفظتك</li>
-                    <li><strong>تأكيد فوري:</strong> ستتم معالجة الدفع تلقائياً وسيتم تفعيل حسابك</li>
-                </ol>
-                <p class="security-note">🔒 جميع المعاملات محمية بتقنيات التشفير الأعلى عالمياً</p>
+            <div class="faq-items">
+                <div class="faq-item">
+                    <div class="faq-question" onclick="toggleFAQ(this)">
+                        <span>هل يمكن البدء بدون خبرة سابقة؟</span>
+                        <i class="fas fa-chevron-down"></i>
+                    </div>
+                    <div class="faq-answer">
+                        <p>نعم، كل دوراتنا مصممة للمبتدئين. نبدأ من الصفر ونصل معك للمستوى الاحترافي.</p>
+                    </div>
+                </div>
+
+                <div class="faq-item">
+                    <div class="faq-question" onclick="toggleFAQ(this)">
+                        <span>كم تستغرق الدورة؟</span>
+                        <i class="fas fa-chevron-down"></i>
+                    </div>
+                    <div class="faq-answer">
+                        <p>دورة الأساسيات 4 أسابيع، ودورة SMC 8 أسابيع. لكن يمكنك الدراسة بسرعتك الخاصة.</p>
+                    </div>
+                </div>
+
+                <div class="faq-item">
+                    <div class="faq-question" onclick="toggleFAQ(this)">
+                        <span>كم سعر الدورات؟</span>
+                        <i class="fas fa-chevron-down"></i>
+                    </div>
+                    <div class="faq-answer">
+                        <p>دورة الأساسيات مجانية تماماً. دورة SMC برسم مخفض جداً، وكل المسجلين يحصلون على $30 هدية.</p>
+                    </div>
+                </div>
+
+                <div class="faq-item">
+                    <div class="faq-question" onclick="toggleFAQ(this)">
+                        <span>هل هناك دعم بعد انتهاء الدورة؟</span>
+                        <i class="fas fa-chevron-down"></i>
+                    </div>
+                    <div class="faq-answer">
+                        <p>نعم، دعم مجاني دائم على تلغرام وواتس آب. نتابعك حتى تصبح متداول احترافي.</p>
+                    </div>
+                </div>
+
+                <div class="faq-item">
+                    <div class="faq-question" onclick="toggleFAQ(this)">
+                        <span>هل يمكن الحصول على شهادة؟</span>
+                        <i class="fas fa-chevron-down"></i>
+                    </div>
+                    <div class="faq-answer">
+                        <p>نعم، جميع الطلاب يحصلون على شهادة إتمام الدورة، وندعمك للحصول على شهادات FTMO و FundingPips.</p>
+                    </div>
+                </div>
             </div>
+        </div>
+    </section>
+
+    <!-- Payment Page Link -->
+    <section class="payment-cta">
+        <div class="container">
+            <h2>اختر طريقة الدفع المناسبة لك</h2>
+            <a href="payment-plans.html" class="btn btn-primary btn-lg">
+                <i class="fas fa-credit-card"></i> اكتشف خطط الدفع
+            </a>
         </div>
     </section>
 
     <!-- Contact Section -->
-    <section class="contact" id="contact">
-        <div class="section-container">
-            <h2 class="section-title">تواصل معنا</h2>
-            <p class="section-subtitle">انضم إلى مجتمعنا والبق على اتصال</p>
-            
+    <section class="contact-section" id="contact">
+        <div class="container">
+            <div class="section-header">
+                <h2>📞 تواصل معنا</h2>
+                <p>نحن هنا لمساعدتك</p>
+            </div>
+
             <div class="contact-grid">
-                <a href="https://www.instagram.com/evan.trading?exln=MWcwZ3B2aHBndzN6NA==" target="_blank" class="contact-link instagram">
-                    <svg viewBox="0 0 24 24" fill="currentColor">
-                        <path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.266.069 1.646.069 4.85 0 3.204-.012 3.584-.07 4.85-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zM5.838 12a6.162 6.162 0 1 1 12.324 0 6.162 6.162 0 0 1-12.324 0zM12 16a4 4 0 1 1 0-8 4 4 0 0 1 0 8zm4.965-10.322a1.44 1.44 0 1 1 2.881.001 1.44 1.44 0 0 1-2.881-.001z"/>
-                    </svg>
-                    <span>Instagram</span>
+                <a href="https://www.instagram.com/evan.trading" class="contact-card" target="_blank">
+                    <i class="fab fa-instagram"></i>
+                    <h4>Instagram</h4>
+                    <p>تابعنا للمحتوى اليومي</p>
                 </a>
-
-                <a href="https://t.me/E_Trading9" target="_blank" class="contact-link telegram">
-                    <svg viewBox="0 0 24 24" fill="currentColor">
-                        <path d="M12 0C5.373 0 0 5.373 0 12s5.373 12 12 12 12-5.373 12-12S18.627 0 12 0zm5.894 8.221l-1.97 9.28c-.145.658-.537.818-1.084.508l-3-2.21-1.446 1.394c-.14.146-.357.292-.748.292l.22-3.12 5.678-5.126c.25-.223-.054-.345-.385-.122L6.46 13.285l-3.106-.962c-.675-.215-.686-.675.15-.99l12.14-4.686c.563-.231 1.057.144.876 1.029z"/>
-                    </svg>
-                    <span>Telegram</span>
+                <a href="https://t.me/E_Trading9" class="contact-card" target="_blank">
+                    <i class="fab fa-telegram"></i>
+                    <h4>Telegram</h4>
+                    <p>الدعم الفوري والإعلانات</p>
                 </a>
-
-                <a href="https://www.facebook.com/share/19hBwG6DZ6/" target="_blank" class="contact-link facebook">
-                    <svg viewBox="0 0 24 24" fill="currentColor">
-                        <path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/>
-                    </svg>
-                    <span>Facebook</span>
+                <a href="https://www.youtube.com/@evantrades" class="contact-card" target="_blank">
+                    <i class="fab fa-youtube"></i>
+                    <h4>YouTube</h4>
+                    <p>فيديوهات تعليمية مجانية</p>
+                </a>
+                <a href="https://www.facebook.com/share/19hBwG6DZ6/" class="contact-card" target="_blank">
+                    <i class="fab fa-facebook"></i>
+                    <h4>Facebook</h4>
+                    <p>احصل على آخر الأخبار</p>
                 </a>
             </div>
 
-            <!-- Support Chat Button -->
-            <div class="support-button-container">
-                <button class="support-button" id="supportBtn">
-                    <svg viewBox="0 0 24 24" fill="currentColor">
-                        <path d="M20 2H4c-1.1 0-2 .9-2 2v18l4-4h14c1.1 0 2-.9 2-2V4c0-1.1-.9-2-2-2zm-2 12h-8v-2h8v2zm0-3h-8V9h8v2zm0-3H6V6h12v2z"/>
-                    </svg>
-                    <span>الدعم</span>
-                </button>
+            <div class="contact-info">
+                <p>📧 البريد: <a href="mailto:etrade123567@gmail.com">etrade123567@gmail.com</a></p>
             </div>
         </div>
     </section>
 
     <!-- Footer -->
     <footer class="footer">
-        <div class="footer-content">
+        <div class="container">
             <p>&copy; 2026 أكاديمية إيترايدينغ. جميع الحقوق محفوظة.</p>
-            <p class="disclaimer">تحذير: التداول ينطوي على مخاطر. تأكد من فهمك الكامل للمخاطر قبل البدء.</p>
         </div>
     </footer>
+
+    <!-- Floating Contact Buttons -->
+    <div class="floating-buttons">
+        <a href="https://t.me/E_Trading9" class="floating-btn telegram" title="تلغرام">
+            <i class="fab fa-telegram-plane"></i>
+        </a>
+        <a href="https://wa.me/your-whatsapp-number" class="floating-btn whatsapp" title="واتساب">
+            <i class="fab fa-whatsapp"></i>
+        </a>
+    </div>
+
+    <!-- Support Button -->
+    <button class="support-btn" id="supportBtn" title="نموذج الدعم">
+        <i class="fas fa-comments"></i>
+    </button>
+
+    <!-- Support Modal -->
+    <div class="modal" id="supportModal">
+        <div class="modal-content">
+            <span class="close" onclick="closeModal()">&times;</span>
+            <h2>نموذج الدعم</h2>
+            <form id="supportForm">
+                <input type="text" placeholder="اسمك" required>
+                <input type="email" placeholder="بريدك الإلكتروني" required>
+                <input type="text" placeholder="الموضوع" required>
+                <textarea placeholder="رسالتك" rows="4" required></textarea>
+                <button type="submit" class="btn btn-primary">إرسال</button>
+            </form>
+        </div>
+    </div>
 
     <script src="script.js"></script>
 </body>

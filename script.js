@@ -1,44 +1,106 @@
 // Mobile Menu Toggle
-const menuToggle = document.getElementById('menuToggle');
-const navMenu = document.getElementById('navMenu');
+const hamburger = document.getElementById('hamburger');
+const nav = document.querySelector('nav');
 
-menuToggle.addEventListener('click', () => {
-    navMenu.classList.toggle('active');
-    
-    // Animate hamburger icon
-    const spans = menuToggle.querySelectorAll('span');
-    spans[0].style.transform = navMenu.classList.contains('active') ? 'rotate(45deg) translateY(15px)' : '';
-    spans[1].style.opacity = navMenu.classList.contains('active') ? '0' : '1';
-    spans[2].style.transform = navMenu.classList.contains('active') ? 'rotate(-45deg) translateY(-15px)' : '';
+hamburger.addEventListener('click', () => {
+    nav.classList.toggle('open');
 });
 
-// Close mobile menu when clicking on a link
-const navLinks = document.querySelectorAll('.nav-link');
-navLinks.forEach(link => {
+// Close menu when link is clicked
+document.querySelectorAll('nav a').forEach(link => {
     link.addEventListener('click', () => {
-        navMenu.classList.remove('active');
-        const spans = menuToggle.querySelectorAll('span');
-        spans[0].style.transform = '';
-        spans[1].style.opacity = '1';
-        spans[2].style.transform = '';
+        nav.classList.remove('open');
     });
 });
 
-// Smooth scroll behavior
-document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-    anchor.addEventListener('click', function (e) {
-        e.preventDefault();
-        const target = document.querySelector(this.getAttribute('href'));
-        if (target) {
-            target.scrollIntoView({
-                behavior: 'smooth',
-                block: 'start'
-            });
-        }
-    });
+// Support Modal
+const supportBtn = document.getElementById('supportBtn');
+const supportModal = document.getElementById('supportModal');
+const closeBtn = document.querySelector('.close');
+const supportForm = document.getElementById('supportForm');
+
+supportBtn.addEventListener('click', () => {
+    supportModal.style.display = 'block';
 });
 
-// Add animation to elements on scroll
+closeBtn.addEventListener('click', () => {
+    closeModal();
+});
+
+window.addEventListener('click', (event) => {
+    if (event.target == supportModal) {
+        closeModal();
+    }
+});
+
+function closeModal() {
+    supportModal.style.display = 'none';
+}
+
+// Support Form Submission
+supportForm.addEventListener('submit', (e) => {
+    e.preventDefault();
+    
+    const name = supportForm.querySelector('input[type="text"]').value;
+    const email = supportForm.querySelector('input[type="email"]').value;
+    const subject = supportForm.querySelectorAll('input[type="text"]')[1].value;
+    const message = supportForm.querySelector('textarea').value;
+    
+    const mailtoLink = `mailto:etrade123567@gmail.com?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(`الاسم: ${name}\nالبريد: ${email}\n\nالرسالة:\n${message}`)}`;
+    
+    window.location.href = mailtoLink;
+    closeModal();
+    supportForm.reset();
+});
+
+// Smooth Scroll Helper
+function scrollTo(id) {
+    const element = document.getElementById(id);
+    if (element) {
+        element.scrollIntoView({ behavior: 'smooth' });
+        nav.classList.remove('open');
+    }
+}
+
+// FAQ Toggle
+function toggleFAQ(element) {
+    const faqItem = element.parentElement;
+    const isOpen = faqItem.classList.contains('open');
+    
+    // Close all other FAQs
+    document.querySelectorAll('.faq-item').forEach(item => {
+        item.classList.remove('open');
+    });
+    
+    // Toggle current FAQ
+    if (!isOpen) {
+        faqItem.classList.add('open');
+    }
+}
+
+// Announcement Bar Close
+const announcementBar = document.getElementById('announcementBar');
+if (announcementBar) {
+    const closeBtn = announcementBar.querySelector('.close-announcement');
+    if (closeBtn) {
+        closeBtn.addEventListener('click', () => {
+            announcementBar.style.display = 'none';
+        });
+    }
+}
+
+// Hero Video Fallback (if video fails to load)
+const heroVideo = document.getElementById('heroVideo');
+if (heroVideo) {
+    heroVideo.addEventListener('error', () => {
+        // Fallback to gradient background
+        const hero = document.querySelector('.hero');
+        hero.style.background = 'linear-gradient(135deg, #D4AF37, #E8D4A8)';
+        heroVideo.style.display = 'none';
+    });
+}
+
+// Add scroll animation for elements
 const observerOptions = {
     threshold: 0.1,
     rootMargin: '0px 0px -100px 0px'
@@ -53,181 +115,80 @@ const observer = new IntersectionObserver((entries) => {
     });
 }, observerOptions);
 
-// Apply animation to course cards and payment methods
-document.querySelectorAll('.course-card, .payment-method').forEach(element => {
-    element.style.opacity = '0';
-    element.style.transform = 'translateY(20px)';
-    element.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
-    observer.observe(element);
+// Observe all cards
+document.querySelectorAll('.course-card, .why-card, .inzo-card, .contact-card, .result-card').forEach(card => {
+    card.style.opacity = '0';
+    card.style.transform = 'translateY(20px)';
+    card.style.transition = 'all 0.6s ease-out';
+    observer.observe(card);
 });
 
-// CTA Button Click Handler
-const ctaButton = document.querySelector('.cta-button');
-ctaButton.addEventListener('click', () => {
-    const coursesSection = document.getElementById('courses');
-    coursesSection.scrollIntoView({ behavior: 'smooth' });
+// Scroll to top on page load
+window.addEventListener('load', () => {
+    window.scrollTo(0, 0);
 });
 
-// Course Button Click Handlers
-const courseButtons = document.querySelectorAll('.course-btn');
-courseButtons.forEach((button, index) => {
-    button.addEventListener('click', () => {
-        if (index === 0) {
-            // Basic course button
-            alert('تم الانتقال إلى صفحة التسجيل المجاني للدورة الأساسية');
-        } else {
-            // Premium course button
-            alert('تم الانتقال إلى صفحة الاشتراك في دورة SMC الاحترافية');
+// Add active state to nav links based on scroll position
+window.addEventListener('scroll', () => {
+    const sections = document.querySelectorAll('section[id]');
+    const scrollPosition = window.scrollY + 100;
+
+    sections.forEach(section => {
+        const sectionTop = section.offsetTop;
+        const sectionHeight = section.offsetHeight;
+        const sectionId = section.getAttribute('id');
+
+        if (scrollPosition >= sectionTop && scrollPosition < sectionTop + sectionHeight) {
+            document.querySelectorAll('nav a').forEach(link => {
+                link.style.color = 'var(--dark-text)';
+            });
+
+            const activeLink = document.querySelector(`nav a[href="#${sectionId}"]`);
+            if (activeLink) {
+                activeLink.style.color = 'var(--gold-primary)';
+            }
         }
     });
 });
 
-// Contact Links
-const contactLinks = document.querySelectorAll('.contact-link');
-contactLinks.forEach(link => {
-    link.addEventListener('mouseenter', function() {
-        this.style.borderColor = 'var(--gold-primary)';
-    });
-    
-    link.addEventListener('mouseleave', function() {
-        this.style.borderColor = 'var(--border-light)';
-    });
-});
+// Dynamic results loading (replace with API call later if needed)
+function loadResults() {
+    const resultsGrid = document.getElementById('resultsGrid');
+    if (!resultsGrid) return;
 
-// Navbar scroll effect
-let lastScrollTop = 0;
-const header = document.querySelector('.header');
+    // This is a placeholder - you can replace with API call later
+    const sampleResults = [
+        {
+            name: 'محمد أحمد',
+            profit: '+$5,000',
+            review: 'الدورة غيّرت نظري للتداول تماماً'
+        },
+        {
+            name: 'فاطمة علي',
+            profit: '+$8,500',
+            review: 'أفضل استثمار قمت به في حياتي'
+        },
+        {
+            name: 'علي خالد',
+            profit: '+$12,000',
+            review: 'المتابعة المباشرة ساعدتني كثيراً'
+        }
+    ];
 
-window.addEventListener('scroll', () => {
-    let currentScroll = window.pageYOffset || document.documentElement.scrollTop;
-    
-    if (currentScroll > 100) {
-        header.style.boxShadow = '0 2px 10px rgba(0, 0, 0, 0.1)';
-    } else {
-        header.style.boxShadow = '0 2px 4px rgba(0, 0, 0, 0.05)';
-    }
-    
-    lastScrollTop = currentScroll <= 0 ? 0 : currentScroll;
-});
-
-// Add ripple effect to buttons
-document.querySelectorAll('.cta-button, .course-btn').forEach(button => {
-    button.addEventListener('click', function(e) {
-        const ripple = document.createElement('span');
-        const rect = this.getBoundingClientRect();
-        const size = Math.max(rect.width, rect.height);
-        const x = e.clientX - rect.left - size / 2;
-        const y = e.clientY - rect.top - size / 2;
-        
-        ripple.style.width = ripple.style.height = size + 'px';
-        ripple.style.left = x + 'px';
-        ripple.style.top = y + 'px';
-        ripple.classList.add('ripple');
-        
-        this.appendChild(ripple);
-        
-        setTimeout(() => ripple.remove(), 600);
-    });
-});
+    // Results are already in HTML, but this function can be used to update them dynamically
+}
 
 // Initialize on page load
 document.addEventListener('DOMContentLoaded', () => {
-    // Add loading animation to hero section
-    const heroContent = document.querySelector('.hero-content');
-    heroContent.style.opacity = '0';
-    heroContent.style.transform = 'translateY(20px)';
-    
-    setTimeout(() => {
-        heroContent.style.transition = 'opacity 0.8s ease, transform 0.8s ease';
-        heroContent.style.opacity = '1';
-        heroContent.style.transform = 'translateY(0)';
-    }, 100);
+    loadResults();
 });
 
-// Add aria labels for accessibility
-document.querySelectorAll('.nav-link').forEach(link => {
-    link.setAttribute('role', 'navigation');
-});
+// WhatsApp number (update with actual number)
+const whatsappBtn = document.querySelector('.floating-btn.whatsapp');
+if (whatsappBtn) {
+    whatsappBtn.href = 'https://wa.me/yourwhatsappnumber'; // Update this
+}
 
-document.querySelectorAll('button').forEach(button => {
-    if (!button.getAttribute('aria-label')) {
-        button.setAttribute('role', 'button');
-    }
-});
-
-// Support Modal Functionality
-const supportBtn = document.getElementById('supportBtn');
-
-// Create support modal HTML
-const supportModal = document.createElement('div');
-supportModal.className = 'support-modal';
-supportModal.id = 'supportModal';
-supportModal.innerHTML = `
-    <div class="support-content">
-        <div class="support-header">
-            <h3 class="support-title">اتصل بنا</h3>
-            <button class="close-support">&times;</button>
-        </div>
-        <div class="support-email">
-            <strong>البريد الإلكتروني:</strong>
-            <a href="mailto:etrade123567@gmail.com">etrade123567@gmail.com</a>
-        </div>
-        <form class="support-form" id="supportForm">
-            <div class="form-group">
-                <label for="name">الاسم</label>
-                <input type="text" id="name" name="name" required>
-            </div>
-            <div class="form-group">
-                <label for="email">البريد الإلكتروني</label>
-                <input type="email" id="email" name="email" required>
-            </div>
-            <div class="form-group">
-                <label for="subject">الموضوع</label>
-                <input type="text" id="subject" name="subject" required>
-            </div>
-            <div class="form-group">
-                <label for="message">الرسالة</label>
-                <textarea id="message" name="message" required></textarea>
-            </div>
-            <button type="submit" class="submit-support">إرسال الرسالة</button>
-        </form>
-    </div>
-`;
-
-document.body.appendChild(supportModal);
-
-// Support modal functions
-const closeBtn = supportModal.querySelector('.close-support');
-const supportForm = document.getElementById('supportForm');
-
-supportBtn.addEventListener('click', () => {
-    supportModal.classList.add('active');
-});
-
-closeBtn.addEventListener('click', () => {
-    supportModal.classList.remove('active');
-});
-
-supportModal.addEventListener('click', (e) => {
-    if (e.target === supportModal) {
-        supportModal.classList.remove('active');
-    }
-});
-
-supportForm.addEventListener('submit', (e) => {
-    e.preventDefault();
-    const name = document.getElementById('name').value;
-    const email = document.getElementById('email').value;
-    const subject = document.getElementById('subject').value;
-    const message = document.getElementById('message').value;
-    
-    // Create mailto link
-    const mailtoLink = `mailto:etrade123567@gmail.com?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(`الاسم: ${name}\nالبريد: ${email}\n\n${message}`)}`;
-    
-    window.location.href = mailtoLink;
-    
-    // Show confirmation
-    alert('تم إرسال رسالتك! شكراً لتواصلك معنا.');
-    supportForm.reset();
-    supportModal.classList.remove('active');
-});
+// Console message
+console.log('%cأكاديمية إيترايدينغ', 'font-size: 24px; color: #D4AF37; font-weight: bold;');
+console.log('%cتعليم التداول الاحترافي', 'font-size: 16px; color: #666;');

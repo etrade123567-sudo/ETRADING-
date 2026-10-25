@@ -1,0 +1,523 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>خطط الدفع - أكاديمية إيترايدينغ</title>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700&family=Poppins:wght@400;500;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="style.css">
+    <style>
+        .payment-hero {
+            background: linear-gradient(135deg, var(--gold-light), var(--gold-primary));
+            padding: 4rem 0;
+            text-align: center;
+            color: var(--dark-text);
+        }
+
+        .payment-hero h1 {
+            font-family: 'Playfair Display', serif;
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+        }
+
+        .payment-plans-section {
+            padding: 5rem 0;
+        }
+
+        .plans-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            margin-bottom: 3rem;
+        }
+
+        .plan-card {
+            background: var(--primary-white);
+            border: 2px solid var(--border-light);
+            border-radius: 4px;
+            padding: 2.5rem;
+            text-align: center;
+            transition: all 0.3s;
+            position: relative;
+        }
+
+        .plan-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 20px 50px rgba(0,0,0,0.1);
+            border-color: var(--gold-primary);
+        }
+
+        .plan-card.featured {
+            border-color: var(--gold-primary);
+            background: linear-gradient(135deg, rgba(212, 175, 55, 0.05), rgba(232, 212, 168, 0.05));
+            transform: scale(1.05);
+        }
+
+        .plan-badge {
+            position: absolute;
+            top: -15px;
+            left: 50%;
+            transform: translateX(-50%);
+            background: var(--gold-primary);
+            color: var(--dark-text);
+            padding: 0.5rem 1rem;
+            border-radius: 20px;
+            font-weight: 600;
+            font-size: 0.85rem;
+            text-transform: uppercase;
+        }
+
+        .plan-card h3 {
+            font-size: 1.5rem;
+            margin-top: 1rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .plan-price {
+            font-family: 'Playfair Display', serif;
+            font-size: 3rem;
+            color: var(--gold-primary);
+            margin: 1rem 0;
+            font-weight: 700;
+        }
+
+        .plan-period {
+            color: var(--light-text);
+            margin-bottom: 1.5rem;
+        }
+
+        .plan-features {
+            list-style: none;
+            margin-bottom: 2rem;
+            text-align: right;
+        }
+
+        .plan-features li {
+            padding: 0.5rem 0;
+            color: var(--light-text);
+            border-bottom: 1px solid var(--border-light);
+        }
+
+        .plan-features li:before {
+            content: '✓ ';
+            color: var(--gold-primary);
+            font-weight: 700;
+            margin-left: 0.5rem;
+        }
+
+        .plan-card .btn {
+            width: 100%;
+        }
+
+        .payment-methods {
+            background: var(--secondary-white);
+            padding: 3rem;
+            border-radius: 4px;
+            margin-bottom: 3rem;
+        }
+
+        .methods-title {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.8rem;
+            margin-bottom: 2rem;
+            text-align: center;
+        }
+
+        .methods-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+        }
+
+        .method-card {
+            background: var(--primary-white);
+            padding: 2rem;
+            border-radius: 4px;
+            text-align: center;
+            border: 1px solid var(--border-light);
+            transition: all 0.3s;
+        }
+
+        .method-card:hover {
+            border-color: var(--gold-primary);
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+        }
+
+        .method-icon {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+            color: var(--gold-primary);
+        }
+
+        .method-card h4 {
+            margin-bottom: 0.5rem;
+            font-size: 1.1rem;
+        }
+
+        .method-card p {
+            color: var(--light-text);
+            margin-bottom: 1rem;
+        }
+
+        .wallet-address {
+            background: var(--secondary-white);
+            padding: 1rem;
+            border-radius: 4px;
+            word-break: break-all;
+            font-family: monospace;
+            font-size: 0.85rem;
+            margin-bottom: 1rem;
+            direction: ltr;
+        }
+
+        .copy-btn {
+            background: var(--gold-primary);
+            color: var(--dark-text);
+            border: none;
+            padding: 0.5rem 1rem;
+            border-radius: 4px;
+            cursor: pointer;
+            font-weight: 600;
+            transition: all 0.3s;
+            font-size: 0.85rem;
+        }
+
+        .copy-btn:hover {
+            transform: scale(1.05);
+        }
+
+        .copy-btn.copied {
+            background: var(--success);
+            color: white;
+        }
+
+        .security-note {
+            background: #fff3cd;
+            border-left: 4px solid #ffc107;
+            padding: 1.5rem;
+            margin-top: 2rem;
+            border-radius: 4px;
+        }
+
+        .security-note strong {
+            color: var(--dark-text);
+        }
+
+        .comparison-table {
+            width: 100%;
+            margin: 3rem 0;
+            border-collapse: collapse;
+            background: var(--primary-white);
+        }
+
+        .comparison-table th,
+        .comparison-table td {
+            padding: 1rem;
+            text-align: right;
+            border-bottom: 1px solid var(--border-light);
+        }
+
+        .comparison-table th {
+            background: var(--secondary-white);
+            font-weight: 600;
+            color: var(--dark-text);
+        }
+
+        .comparison-table td {
+            color: var(--light-text);
+        }
+
+        .comparison-table tr:hover {
+            background: var(--secondary-white);
+        }
+
+        @media (max-width: 768px) {
+            .plan-card.featured {
+                transform: scale(1);
+            }
+
+            .plan-price {
+                font-size: 2rem;
+            }
+
+            .comparison-table {
+                font-size: 0.85rem;
+            }
+
+            .comparison-table th,
+            .comparison-table td {
+                padding: 0.75rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header class="header">
+        <div class="container">
+            <a href="index.html" class="logo-section">
+                <img src="logo.png" alt="E-TRADING Logo" class="logo">
+                <span class="logo-text">E-TRADING</span>
+            </a>
+            <nav class="nav">
+                <a href="index.html#home">الرئيسية</a>
+                <a href="index.html#courses">الدورات</a>
+                <a href="index.html#contact">تواصل</a>
+            </nav>
+            <div class="hamburger" id="hamburger">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+        </div>
+    </header>
+
+    <!-- Hero -->
+    <section class="payment-hero">
+        <div class="container">
+            <h1>💳 خطط الاشتراك والدفع</h1>
+            <p>اختر الخطة المناسبة لك وابدأ رحلتك نحو التداول الاحترافي</p>
+        </div>
+    </section>
+
+    <!-- Plans Section -->
+    <section class="payment-plans-section">
+        <div class="container">
+            <div class="plans-grid">
+                <!-- Free Plan -->
+                <div class="plan-card">
+                    <h3>🎓 الأساسيات</h3>
+                    <p>دورة مجانية</p>
+                    <div class="plan-price">0$</div>
+                    <p class="plan-period">إلى الأبد</p>
+                    <ul class="plan-features">
+                        <li>4 أسابيع من المحتوى</li>
+                        <li>مقدمة شاملة</li>
+                        <li>مجتمع الطلاب</li>
+                        <li>دعم بريد إلكتروني</li>
+                        <li>شهادة إتمام</li>
+                    </ul>
+                    <button class="btn btn-primary" onclick="scrollToPayment()">ابدأ مجاناً</button>
+                </div>
+
+                <!-- Premium Plan -->
+                <div class="plan-card featured">
+                    <div class="plan-badge">⭐ الأكثر شهرة</div>
+                    <h3>🚀 SMC الاحترافية</h3>
+                    <p>دورة متقدمة</p>
+                    <div class="plan-price">$199</div>
+                    <p class="plan-period">دفعة واحدة</p>
+                    <ul class="plan-features">
+                        <li>8 أسابيع تدريب مكثف</li>
+                        <li>Smart Money Concepts متقدمة</li>
+                        <li>جلسات حية يومية</li>
+                        <li>متابعة شخصية</li>
+                        <li>قناة التوصيات الحصرية</li>
+                        <li>هدية حساب $60</li>
+                        <li>شهادة معترف بها</li>
+                        <li>دعم مدى الحياة</li>
+                    </ul>
+                    <button class="btn btn-primary" onclick="scrollToPayment()">اشترك الآن</button>
+                </div>
+
+                <!-- VIP Plan -->
+                <div class="plan-card">
+                    <h3>👑 VIP النخبة</h3>
+                    <p>تدريب احترافي</p>
+                    <div class="plan-price">$499</div>
+                    <p class="plan-period">دفعة واحدة</p>
+                    <ul class="plan-features">
+                        <li>كل مميزات SMC</li>
+                        <li>استشارة فردية</li>
+                        <li>جلسات one-on-one</li>
+                        <li>تحليل الحسابات</li>
+                        <li>دعم 24/7</li>
+                        <li>إمكانية الإحالة</li>
+                        <li>عمولات الإحالة</li>
+                    </ul>
+                    <button class="btn btn-primary" onclick="scrollToPayment()">كن VIP</button>
+                </div>
+            </div>
+
+            <!-- Comparison Table -->
+            <div style="overflow-x: auto;">
+                <table class="comparison-table">
+                    <thead>
+                        <tr>
+                            <th>الميزة</th>
+                            <th>الأساسيات</th>
+                            <th>SMC الاحترافية</th>
+                            <th>VIP النخبة</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td><strong>السعر</strong></td>
+                            <td>مجاني</td>
+                            <td>$199</td>
+                            <td>$499</td>
+                        </tr>
+                        <tr>
+                            <td><strong>مدة الدورة</strong></td>
+                            <td>4 أسابيع</td>
+                            <td>8 أسابيع</td>
+                            <td>8 أسابيع +</td>
+                        </tr>
+                        <tr>
+                            <td><strong>جلسات حية</strong></td>
+                            <td>❌</td>
+                            <td>✅ يومية</td>
+                            <td>✅ يومية</td>
+                        </tr>
+                        <tr>
+                            <td><strong>متابعة شخصية</strong></td>
+                            <td>❌</td>
+                            <td>✅</td>
+                            <td>✅ مكثفة</td>
+                        </tr>
+                        <tr>
+                            <td><strong>الدعم</strong></td>
+                            <td>بريد فقط</td>
+                            <td>24/7</td>
+                            <td>أولوية عالية</td>
+                        </tr>
+                        <tr>
+                            <td><strong>هدية الحساب</strong></td>
+                            <td>❌</td>
+                            <td>$60</td>
+                            <td>$100+</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </section>
+
+    <!-- Payment Methods -->
+    <section class="payment-methods">
+        <div class="container">
+            <h2 class="methods-title">💳 طرق الدفع المتاحة</h2>
+            
+            <div class="methods-grid">
+                <!-- USDT TRC20 -->
+                <div class="method-card">
+                    <div class="method-icon">🔗</div>
+                    <h4>USDT - TRC20</h4>
+                    <p>التحويل السريع والآمن</p>
+                    <div class="wallet-address">TMaKvEq5FaG7wteLmAQFJPj7Y3GVskEwk3</div>
+                    <button class="copy-btn" onclick="copyToClipboard('TMaKvEq5FaG7wteLmAQFJPj7Y3GVskEwk3', this)">📋 انسخ العنوان</button>
+                </div>
+
+                <!-- USDT BEP20 -->
+                <div class="method-card">
+                    <div class="method-icon">🌐</div>
+                    <h4>USDT - BEP20</h4>
+                    <p>عبر شبكة BSC</p>
+                    <div class="wallet-address">0x1234567890abcdef1234567890abcdef12345678</div>
+                    <button class="copy-btn" onclick="copyToClipboard('0x1234567890abcdef1234567890abcdef12345678', this)">📋 انسخ العنوان</button>
+                </div>
+
+                <!-- Bank Transfer -->
+                <div class="method-card">
+                    <div class="method-icon">🏦</div>
+                    <h4>تحويل بنكي</h4>
+                    <p>للعملات المحلية</p>
+                    <p>تواصل معنا للحصول على بيانات التحويل</p>
+                    <a href="https://t.me/E_Trading9" class="btn btn-secondary" style="width: 100%;">تواصل الآن</a>
+                </div>
+
+                <!-- PayPal -->
+                <div class="method-card">
+                    <div class="method-icon">💰</div>
+                    <h4>PayPal</h4>
+                    <p>للعملاء الدوليين</p>
+                    <p>اطلب رابط الدفع من الدعم</p>
+                    <a href="mailto:etrade123567@gmail.com" class="btn btn-secondary" style="width: 100%;">اطلب الرابط</a>
+                </div>
+
+                <!-- Stripe -->
+                <div class="method-card">
+                    <div class="method-icon">💳</div>
+                    <h4>Stripe</h4>
+                    <p>الدفع ببطاقة الائتمان</p>
+                    <p>قريباً سيكون متاحاً</p>
+                    <button class="btn btn-outline" style="width: 100%;" disabled>قريباً</button>
+                </div>
+
+                <!-- Crypto -->
+                <div class="method-card">
+                    <div class="method-icon">₿</div>
+                    <h4>عملات رقمية أخرى</h4>
+                    <p>BTC, ETH وغيرها</p>
+                    <p>تواصل معنا للتفاصيل</p>
+                    <a href="https://t.me/E_Trading9" class="btn btn-secondary" style="width: 100%;">استفسر الآن</a>
+                </div>
+            </div>
+
+            <!-- Security Note -->
+            <div class="security-note">
+                <strong>🔒 ملاحظة أمان مهمة:</strong>
+                <p>تأكد من نسخ العنوان بشكل صحيح. لن نتمكن من استرجاع الأموال المرسلة إلى عناوين خاطئة. دائماً اختبر بمبلغ صغير أولاً.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Promo -->
+    <section class="payment-cta">
+        <div class="container">
+            <h2>🎁 عرض خاص</h2>
+            <p>سجل الآن واحصل على $30 هدية إضافية!</p>
+            <a href="https://t.me/E_Trading9" class="btn btn-primary btn-lg">تواصل معنا الآن</a>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <p>&copy; 2026 أكاديمية إيترايدينغ. جميع الحقوق محفوظة.</p>
+        </div>
+    </footer>
+
+    <!-- Floating Contact Buttons -->
+    <div class="floating-buttons">
+        <a href="https://t.me/E_Trading9" class="floating-btn telegram" title="تلغرام">
+            <i class="fab fa-telegram-plane"></i>
+        </a>
+    </div>
+
+    <script>
+        // Copy to Clipboard Function
+        function copyToClipboard(text, button) {
+            navigator.clipboard.writeText(text).then(() => {
+                const originalText = button.textContent;
+                button.textContent = '✅ تم النسخ!';
+                button.classList.add('copied');
+                setTimeout(() => {
+                    button.textContent = originalText;
+                    button.classList.remove('copied');
+                }, 2000);
+            });
+        }
+
+        // Scroll to Payment Methods
+        function scrollToPayment() {
+            document.querySelector('.payment-methods').scrollIntoView({ behavior: 'smooth' });
+        }
+
+        // Mobile Menu Toggle
+        const hamburger = document.getElementById('hamburger');
+        const nav = document.querySelector('nav');
+
+        hamburger.addEventListener('click', () => {
+            nav.classList.toggle('open');
+        });
+
+        document.querySelectorAll('nav a').forEach(link => {
+            link.addEventListener('click', () => {
+                nav.classList.remove('open');
+            });
+        });
+    </script>
+</body>
+</html>
