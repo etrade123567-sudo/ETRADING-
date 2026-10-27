@@ -78,28 +78,6 @@ function toggleFAQ(element) {
     }
 }
 
-// Announcement Bar Close
-const announcementBar = document.getElementById('announcementBar');
-if (announcementBar) {
-    const closeBtn = announcementBar.querySelector('.close-announcement');
-    if (closeBtn) {
-        closeBtn.addEventListener('click', () => {
-            announcementBar.style.display = 'none';
-        });
-    }
-}
-
-// Hero Video Fallback (if video fails to load)
-const heroVideo = document.getElementById('heroVideo');
-if (heroVideo) {
-    heroVideo.addEventListener('error', () => {
-        // Fallback to gradient background
-        const hero = document.querySelector('.hero');
-        hero.style.background = 'linear-gradient(135deg, #D4AF37, #E8D4A8)';
-        heroVideo.style.display = 'none';
-    });
-}
-
 // Add scroll animation for elements
 const observerOptions = {
     threshold: 0.1,
@@ -116,7 +94,7 @@ const observer = new IntersectionObserver((entries) => {
 }, observerOptions);
 
 // Observe all cards
-document.querySelectorAll('.course-card, .why-card, .inzo-card, .contact-card, .result-card').forEach(card => {
+document.querySelectorAll('.feature-card, .course-card, .contact-card, .result-card').forEach(card => {
     card.style.opacity = '0';
     card.style.transform = 'translateY(20px)';
     card.style.transition = 'all 0.6s ease-out';
@@ -127,67 +105,6 @@ document.querySelectorAll('.course-card, .why-card, .inzo-card, .contact-card, .
 window.addEventListener('load', () => {
     window.scrollTo(0, 0);
 });
-
-// Add active state to nav links based on scroll position
-window.addEventListener('scroll', () => {
-    const sections = document.querySelectorAll('section[id]');
-    const scrollPosition = window.scrollY + 100;
-
-    sections.forEach(section => {
-        const sectionTop = section.offsetTop;
-        const sectionHeight = section.offsetHeight;
-        const sectionId = section.getAttribute('id');
-
-        if (scrollPosition >= sectionTop && scrollPosition < sectionTop + sectionHeight) {
-            document.querySelectorAll('nav a').forEach(link => {
-                link.style.color = 'var(--dark-text)';
-            });
-
-            const activeLink = document.querySelector(`nav a[href="#${sectionId}"]`);
-            if (activeLink) {
-                activeLink.style.color = 'var(--gold-primary)';
-            }
-        }
-    });
-});
-
-// Dynamic results loading (replace with API call later if needed)
-function loadResults() {
-    const resultsGrid = document.getElementById('resultsGrid');
-    if (!resultsGrid) return;
-
-    // This is a placeholder - you can replace with API call later
-    const sampleResults = [
-        {
-            name: 'محمد أحمد',
-            profit: '+$5,000',
-            review: 'الدورة غيّرت نظري للتداول تماماً'
-        },
-        {
-            name: 'فاطمة علي',
-            profit: '+$8,500',
-            review: 'أفضل استثمار قمت به في حياتي'
-        },
-        {
-            name: 'علي خالد',
-            profit: '+$12,000',
-            review: 'المتابعة المباشرة ساعدتني كثيراً'
-        }
-    ];
-
-    // Results are already in HTML, but this function can be used to update them dynamically
-}
-
-// Initialize on page load
-document.addEventListener('DOMContentLoaded', () => {
-    loadResults();
-});
-
-// WhatsApp number (update with actual number)
-const whatsappBtn = document.querySelector('.floating-btn.whatsapp');
-if (whatsappBtn) {
-    whatsappBtn.href = 'https://wa.me/yourwhatsappnumber'; // Update this
-}
 
 // Console message
 console.log('%cأكاديمية إيترايدينغ', 'font-size: 24px; color: #D4AF37; font-weight: bold;');
