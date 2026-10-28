@@ -1,0 +1,450 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>حاسبة النقاط - أكاديمية إيترايدينغ</title>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700&family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="style.css">
+    <style>
+        .calculator-section {
+            min-height: calc(100vh - 60px);
+            background: linear-gradient(135deg, var(--bg) 0%, var(--white) 100%);
+            padding: 4rem 0;
+        }
+
+        .calculator-container {
+            max-width: 900px;
+            margin: 0 auto;
+        }
+
+        .calculator-title {
+            text-align: center;
+            margin-bottom: 3rem;
+        }
+
+        .calculator-title h1 {
+            font-family: 'Playfair Display', serif;
+            font-size: 2.5rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .calculator-title p {
+            color: var(--light);
+            font-size: 1.1rem;
+        }
+
+        .calculator-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 3rem;
+        }
+
+        .calc-input-group,
+        .calc-results {
+            background: var(--white);
+            padding: 2.5rem;
+            border-radius: 12px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.05);
+        }
+
+        .input-group {
+            margin-bottom: 1.5rem;
+        }
+
+        .input-group label {
+            display: block;
+            margin-bottom: 0.5rem;
+            font-weight: 600;
+            color: var(--dark);
+        }
+
+        .input-group input,
+        .input-group select {
+            width: 100%;
+            padding: 0.8rem;
+            border: 1px solid #ddd;
+            border-radius: 6px;
+            font-family: 'Poppins', sans-serif;
+            font-size: 1rem;
+            transition: all 0.3s;
+        }
+
+        .input-group input:focus,
+        .input-group select:focus {
+            outline: none;
+            border-color: var(--primary);
+            box-shadow: 0 0 0 3px rgba(212, 175, 55, 0.1);
+        }
+
+        .input-hint {
+            font-size: 0.85rem;
+            color: var(--light);
+            margin-top: 0.3rem;
+        }
+
+        .calc-button {
+            width: 100%;
+            padding: 1rem;
+            background: var(--primary);
+            color: var(--dark);
+            border: none;
+            border-radius: 6px;
+            font-weight: 700;
+            font-size: 1rem;
+            cursor: pointer;
+            transition: all 0.3s;
+            margin-top: 1rem;
+        }
+
+        .calc-button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 20px rgba(212, 175, 55, 0.3);
+        }
+
+        .result-item {
+            background: var(--bg);
+            padding: 1.5rem;
+            border-radius: 8px;
+            margin-bottom: 1rem;
+            border-left: 4px solid var(--primary);
+        }
+
+        .result-label {
+            color: var(--light);
+            font-size: 0.9rem;
+            margin-bottom: 0.3rem;
+        }
+
+        .result-value {
+            font-family: 'Playfair Display', serif;
+            font-size: 2rem;
+            font-weight: 700;
+            color: var(--dark);
+        }
+
+        .result-value.positive {
+            color: var(--success);
+        }
+
+        .result-value.negative {
+            color: #e74c3c;
+        }
+
+        .calc-tabs {
+            display: flex;
+            gap: 1rem;
+            margin-bottom: 2rem;
+            border-bottom: 2px solid #ddd;
+        }
+
+        .calc-tab {
+            padding: 1rem 1.5rem;
+            background: none;
+            border: none;
+            cursor: pointer;
+            font-weight: 600;
+            color: var(--light);
+            border-bottom: 3px solid transparent;
+            transition: all 0.3s;
+        }
+
+        .calc-tab.active {
+            color: var(--primary);
+            border-bottom-color: var(--primary);
+        }
+
+        .calc-content {
+            display: none;
+        }
+
+        .calc-content.active {
+            display: block;
+            animation: fadeInUp 0.3s ease-out;
+        }
+
+        .info-box {
+            background: #e3f2fd;
+            border-left: 4px solid #1976d2;
+            padding: 1.5rem;
+            border-radius: 6px;
+            margin-top: 2rem;
+            color: #1565c0;
+        }
+
+        .info-box h4 {
+            margin-bottom: 0.5rem;
+            font-weight: 700;
+        }
+
+        @media (max-width: 768px) {
+            .calculator-grid {
+                grid-template-columns: 1fr;
+                gap: 2rem;
+            }
+
+            .calculator-title h1 {
+                font-size: 2rem;
+            }
+
+            .calc-tabs {
+                flex-wrap: wrap;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="navbar">
+        <div class="container">
+            <div class="nav-brand">
+                <img src="logo.png" alt="Logo" class="nav-logo">
+                <span class="nav-text">E-TRADING</span>
+            </div>
+            <ul class="nav-menu" id="navMenu">
+                <li><a href="index.html">الرئيسية</a></li>
+                <li><a href="calculator.html" style="color: var(--primary);">حاسبة النقاط</a></li>
+                <li><a href="certificates.html">الشهادات</a></li>
+            </ul>
+            <div class="hamburger" id="hamburger">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Calculator Section -->
+    <section class="calculator-section">
+        <div class="calculator-container">
+            <div class="calculator-title">
+                <h1>🧮 حاسبة النقاط والأرباح</h1>
+                <p>حسب أرباحك وخسائرك بدقة عالية</p>
+            </div>
+
+            <div class="calculator-grid">
+                <!-- Input Section -->
+                <div class="calc-input-group">
+                    <div class="calc-tabs">
+                        <button class="calc-tab active" onclick="switchTab('pip')">حساب النقاط</button>
+                        <button class="calc-tab" onclick="switchTab('margin')">حساب الهامش</button>
+                    </div>
+
+                    <!-- Pip Calculator -->
+                    <div id="pip" class="calc-content active">
+                        <div class="input-group">
+                            <label>العملة الأساسية</label>
+                            <select id="currencyPair" onchange="calculatePips()">
+                                <option value="eurusd">EUR/USD</option>
+                                <option value="gbpusd">GBP/USD</option>
+                                <option value="usdjpy">USD/JPY</option>
+                                <option value="audusd">AUD/USD</option>
+                                <option value="usdcad">USD/CAD</option>
+                                <option value="nzdusd">NZD/USD</option>
+                            </select>
+                        </div>
+
+                        <div class="input-group">
+                            <label>سعر الفتح</label>
+                            <input type="number" id="openPrice" placeholder="1.0800" step="0.0001" onchange="calculatePips()">
+                        </div>
+
+                        <div class="input-group">
+                            <label>سعر الإغلاق</label>
+                            <input type="number" id="closePrice" placeholder="1.0850" step="0.0001" onchange="calculatePips()">
+                        </div>
+
+                        <div class="input-group">
+                            <label>حجم العقد (Lot)</label>
+                            <input type="number" id="lotSize" placeholder="0.1" step="0.01" value="1" onchange="calculatePips()">
+                            <div class="input-hint">0.01 = 1000 وحدة، 0.1 = 10000 وحدة، 1 = 100000 وحدة</div>
+                        </div>
+
+                        <button class="calc-button" onclick="calculatePips()">احسب النقاط</button>
+                    </div>
+
+                    <!-- Margin Calculator -->
+                    <div id="margin" class="calc-content">
+                        <div class="input-group">
+                            <label>رأس المال (رصيدك بالدولار)</label>
+                            <input type="number" id="capital" placeholder="1000" step="0.01" onchange="calculateMargin()">
+                        </div>
+
+                        <div class="input-group">
+                            <label>الرافعة المالية</label>
+                            <select id="leverage" onchange="calculateMargin()">
+                                <option value="1">1:1</option>
+                                <option value="10">1:10</option>
+                                <option value="50">1:50</option>
+                                <option value="100">1:100</option>
+                                <option value="200">1:200</option>
+                                <option value="500">1:500</option>
+                            </select>
+                            <div class="input-hint">الرافعة المالية تضاعف القوة الشرائية</div>
+                        </div>
+
+                        <div class="input-group">
+                            <label>حجم العقد</label>
+                            <input type="number" id="marginLotSize" placeholder="0.1" step="0.01" value="1" onchange="calculateMargin()">
+                        </div>
+
+                        <button class="calc-button" onclick="calculateMargin()">احسب الهامش</button>
+                    </div>
+                </div>
+
+                <!-- Results Section -->
+                <div class="calc-results">
+                    <h3>📊 النتائج</h3>
+                    <div id="results" style="margin-top: 1.5rem;">
+                        <p style="color: var(--light); text-align: center;">أدخل البيانات واضغط احسب</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Info Box -->
+            <div class="info-box">
+                <h4>💡 تلميحات مهمة:</h4>
+                <ul style="margin-left: 1.5rem; line-height: 2;">
+                    <li><strong>النقطة (Pip):</strong> أصغر وحدة حركة في السعر = 0.0001</li>
+                    <li><strong>الهامش:</strong> المبلغ المطلوب للاحتفاظ بالصفقة مفتوحة</li>
+                    <li><strong>الرافعة:</strong> تضاعف رأس مالك لكن تزيد المخاطر أيضاً</li>
+                    <li><strong>إدارة المخاطر:</strong> لا تخاطر بأكثر من 1-2% من رأس مالك في الصفقة الواحدة</li>
+                </ul>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-col">
+                    <h4>أكاديمية إيترايدينغ</h4>
+                    <p>أدوات احترافية لتحسين تداولك</p>
+                </div>
+                <div class="footer-col">
+                    <h4>الأدوات</h4>
+                    <ul>
+                        <li><a href="calculator.html">حاسبة النقاط</a></li>
+                        <li><a href="certificates.html">الشهادات</a></li>
+                        <li><a href="index.html">الدورات</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2026 أكاديمية إيترايدينغ. جميع الحقوق محفوظة.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        function switchTab(tab) {
+            // Hide all content
+            document.querySelectorAll('.calc-content').forEach(el => el.classList.remove('active'));
+            document.querySelectorAll('.calc-tab').forEach(el => el.classList.remove('active'));
+            
+            // Show selected tab
+            document.getElementById(tab).classList.add('active');
+            event.target.classList.add('active');
+        }
+
+        function calculatePips() {
+            const openPrice = parseFloat(document.getElementById('openPrice').value);
+            const closePrice = parseFloat(document.getElementById('closePrice').value);
+            const lotSize = parseFloat(document.getElementById('lotSize').value);
+            const currencyPair = document.getElementById('currencyPair').value;
+
+            if (!openPrice || !closePrice || !lotSize) {
+                showResults('<p style="color: var(--light);">أدخل جميع البيانات</p>');
+                return;
+            }
+
+            let pipValue = 0.0001;
+            let multiplier = 100000;
+
+            if (currencyPair === 'usdjpy') {
+                pipValue = 0.01;
+                multiplier = 100000;
+            }
+
+            const pips = Math.round((closePrice - openPrice) / pipValue);
+            const profit = pips * pipValue * multiplier * lotSize;
+
+            const resultsHTML = `
+                <div class="result-item">
+                    <div class="result-label">عدد النقاط</div>
+                    <div class="result-value ${pips >= 0 ? 'positive' : 'negative'}">${pips} نقطة</div>
+                </div>
+                <div class="result-item">
+                    <div class="result-label">الربح/الخسارة</div>
+                    <div class="result-value ${profit >= 0 ? 'positive' : 'negative'}">$${profit.toFixed(2)}</div>
+                </div>
+                <div class="result-item">
+                    <div class="result-label">العملة</div>
+                    <div class="result-value">${currencyPair.toUpperCase()}</div>
+                </div>
+                <div class="result-item">
+                    <div class="result-label">حجم العقد</div>
+                    <div class="result-value">${lotSize} لوت</div>
+                </div>
+            `;
+            showResults(resultsHTML);
+        }
+
+        function calculateMargin() {
+            const capital = parseFloat(document.getElementById('capital').value);
+            const leverage = parseFloat(document.getElementById('leverage').value);
+            const lotSize = parseFloat(document.getElementById('marginLotSize').value);
+
+            if (!capital || !leverage || !lotSize) {
+                showResults('<p style="color: var(--light);">أدخل جميع البيانات</p>');
+                return;
+            }
+
+            const buyingPower = capital * leverage;
+            const marginRequired = (lotSize * 100000) / leverage;
+            const availableMargin = buyingPower - marginRequired;
+            const riskPercentage = (marginRequired / capital) * 100;
+
+            const resultsHTML = `
+                <div class="result-item">
+                    <div class="result-label">القوة الشرائية</div>
+                    <div class="result-value">$${buyingPower.toFixed(2)}</div>
+                </div>
+                <div class="result-item">
+                    <div class="result-label">الهامش المطلوب</div>
+                    <div class="result-value">$${marginRequired.toFixed(2)}</div>
+                </div>
+                <div class="result-item">
+                    <div class="result-label">الهامش المتاح</div>
+                    <div class="result-value ${availableMargin >= 0 ? 'positive' : 'negative'}">$${availableMargin.toFixed(2)}</div>
+                </div>
+                <div class="result-item">
+                    <div class="result-label">نسبة المخاطرة</div>
+                    <div class="result-value">${riskPercentage.toFixed(2)}%</div>
+                </div>
+            `;
+            showResults(resultsHTML);
+        }
+
+        function showResults(html) {
+            document.getElementById('results').innerHTML = html;
+        }
+
+        // Mobile Menu
+        const hamburger = document.getElementById('hamburger');
+        const navMenu = document.getElementById('navMenu');
+
+        hamburger?.addEventListener('click', () => {
+            navMenu.classList.toggle('open');
+        });
+
+        document.querySelectorAll('.nav-menu a').forEach(link => {
+            link.addEventListener('click', () => {
+                navMenu.classList.remove('open');
+            });
+        });
+    </script>
+</body>
+</html>
